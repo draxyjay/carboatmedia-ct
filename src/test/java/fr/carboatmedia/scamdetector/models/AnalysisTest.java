@@ -23,15 +23,18 @@ public class AnalysisTest {
 
     @Test
     public void serializeAnalysis() throws IOException {
-        String json = "{\n" +
-                "\"reference\": \"B300053623\",\n" +
-                "\"scam\": true,\n" +
-                "\"rules\": [\"Rule1\",\"Rule2\"]\n" +
-                "}";
+        String json = """
+                  {
+                    "reference" : "B300053623",
+                    "scam" : true,
+                    "rules" : [ "Rule1", "Rule2" ]
+                  }      
+                """;
 
         Analysis analysis = new Analysis("B300053623", true, Arrays.asList("Rule1", "Rule2"));
         String output = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(analysis);
 
+        System.out.println(json);
         System.out.println(output);
 
         assertEquals(mapper.readTree(json), mapper.readTree(output));
